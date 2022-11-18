@@ -116,7 +116,7 @@ static void __tusb_irq_path_func(_handle_buff_status_bit)(uint bit, struct hw_en
 static void __tusb_irq_path_func(hw_handle_buff_status)(void)
 {
     uint32_t remaining_buffers = usb_hw->buf_status;
-    pico_trace("buf_status 0x%08x\n", remaining_buffers);
+    pico_trace("buf_status 0x%08lx\n", remaining_buffers);
 
     // Check EPX first
     uint bit = 0b1;
@@ -341,7 +341,7 @@ static void _hw_endpoint_init(struct hw_endpoint *ep, uint8_t dev_addr, uint8_t 
       ep_reg |= (uint32_t) ((bmInterval - 1) << EP_CTRL_HOST_INTERRUPT_INTERVAL_LSB);
     }
     *ep->endpoint_control = ep_reg;
-    pico_trace("endpoint control (0x%p) <- 0x%x\n", ep->endpoint_control, ep_reg);
+    pico_trace("endpoint control (0x%p) <- 0x%lx\n", ep->endpoint_control, ep_reg);
     ep->configured = true;
 
     if (ep != &epx)
