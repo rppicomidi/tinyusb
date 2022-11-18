@@ -76,6 +76,7 @@ void hcd_port_reset_end(uint8_t rhport)
 {
   uint8_t const pio_rhport = RHPORT_PIO(rhport);
   pio_usb_host_port_reset_end(pio_rhport);
+  osal_task_delay(10); // 10ms reset recovery time (USB 2.0 spec 7.1.7.4 delta-t6)
 }
 
 bool hcd_port_connect_status(uint8_t rhport)
